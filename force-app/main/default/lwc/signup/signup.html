@@ -1,0 +1,56 @@
+<template>
+    <!-- Container -->
+    <div class="slds-grid slds-wrap slds-p-around_medium">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+
+            <!-- Title -->
+            <div class="slds-text-heading_large slds-text-align_center slds-m-bottom_medium">
+                Signup Page
+            </div>
+
+            <!-- First Name and Last Name -->
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div
+                    class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-bottom_small">
+                    <lightning-input type="text" label="First Name" value={value} onchange={handlechange}
+                        name="FirstName"></lightning-input>
+                </div>
+                <div
+                    class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-p-bottom_small">
+                    <lightning-input type="text" label="Last Name" value={value} onchange={handlechange}
+                        name="LastName"></lightning-input>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="slds-m-bottom_small">
+                <lightning-input type="email" label="Email" value={value} onchange={handlechange}
+                    name="Email"></lightning-input>
+            </div>
+
+            <!-- Password -->
+            <div class="slds-m-bottom_small">
+                <lightning-input type="password" label="Password" value={value} onchange={handlechange}
+                    name="Password"></lightning-input>
+            </div>
+
+            <!-- Status -->
+            <div class="slds-m-bottom_small">
+                <lightning-combobox name="Profile" label="Select Profile" placeholder="Select Status" options={options}
+                    onchange={handlechange} value={value}></lightning-combobox>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="slds-m-bottom_small">
+                <lightning-input name="checkbox" type="checkbox" label="I agree to the Terms and Conditions"
+                    checked={value} onchange={handlechange}></lightning-input>
+            </div>
+
+            <!-- Signup Button -->
+            <div class="slds-m-top_medium slds-text-align_center">
+                <lightning-button label="Signup" onclick={handleSignup}></lightning-button>
+            </div>
+
+        </div>
+    </div>
+</template>

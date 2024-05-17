@@ -1,0 +1,11 @@
+.recordform{
+    padding: 7%;
+    background-color: white;
+}
+.todaystasks{
+    background-color: white;
+}
+.pname-button{
+    display: flex;
+    justify-content: space-between;
+}

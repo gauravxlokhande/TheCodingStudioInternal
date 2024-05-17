@@ -1,0 +1,88 @@
+<template>
+    <!-- Row 1 -->
+    <div class="slds-grid slds-wrap">
+        <div class=" slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12">
+            <div class=" todaystasks slds-p-around_medium slds-box slds-m-around_small ">
+                <h1 class="slds-text-heading_large slds-m-right_small slds-m-bottom_medium">All Project's</h1>
+                <template if:true={StoreAllProjectsData} for:each={StoreAllProjectsData} for:item="project"
+                    for:index="index">
+                    <div class="pname-button slds-border_top slds-border_bottom slds-p-around_medium" key={project.Id}>
+                        <div class="slds-text-heading_medium ">
+                            <h1>{project.Name}</h1>
+                        </div>
+                        <div>
+                            <lightning-button variant="base" label="Add Task" data-id={project.Id}
+                                onclick={handleClickofaddtask}></lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="slds-col slds-small-size_12-of-12 slds-medium-size_8-of-12 slds-large-size_8-of-12">
+
+            <div class="recordform slds-box slds-p-around_medium slds-m-around_small">
+                <h1 class="slds-m-right_small slds-text-heading_large">Employee Tasks</h1>
+                <p class="slds-m-right_small slds-text-heading_small slds-m-top_small">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi ducimus soluta alias molestias
+                    vitae eaque, sunt, possimus dignissimos temporibus corrupti provident.
+                </p>
+                <lightning-combobox data-id="taskComboBox" class="slds-m-top_medium" name="progress" required
+                    value={tasksId} placeholder="Select your task" label="Select Tasks" options={optionsTasks}
+                    onchange={handleChangeTasks}>
+                </lightning-combobox>
+                <lightning-combobox data-id="timeComboBox" class="slds-m-top_small" name="progress" label="Select Time"
+                    required value={Hours} placeholder="Select time consumed" options={HoursOptions}
+                    onchange={handleChangeHours}>
+                </lightning-combobox>
+                <lightning-textarea class="slds-m-top_small" max-length="1000" name="inputName" label="Message"
+                    placeholder="Write any additional comments..." value={additionalmessage} variant="standard"
+                    onchange={handleChangeAdditionalmessage}>
+                </lightning-textarea>
+                <div class="button slds-m-top_medium">
+                    <lightning-button variant="brand" label="Submit Task" onclick={HandleSubmitFinalTask}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:true={CreateTaskTemplate}>
+        <c-modal onhidemodalgloble={handleHideModalGlobal}>
+            <div slot="heading">Create New Task</div>
+            <div slot="Project">
+                <template if:true={ShowProjectcombobox}>
+                    <lightning-combobox data-id="taskproject" label="Select project" value={valueproject}
+                        placeholder="Select project" options={ProjectOptions} onchange={handleChangeProjects}>
+                    </lightning-combobox>
+                </template>
+                <lightning-input type="text" label="Task Name" value={taskname} onchange={handleTaskName}
+                    data-id="taskname">
+                </lightning-input>
+                <lightning-input class="date slds-scrollable_none" type="date" label="Start Date" data-id="taskdate"
+                    value={startdate} onchange={handleStartDate}>
+                </lightning-input>
+            </div>
+            <div slot="button" class="slds-align_absolute-center">
+                <button class="slds-button slds-button_brand slds-align_absolute-center" onclick={createTaskModal}>
+                    Create
+                </button>
+            </div>
+        </c-modal>
+    </template>
+
+    <template if:true={ProjectTemplate}>
+        <c-modal onhidemodalgloble={handleHideModaltwo}>
+            <div slot="heading">Add New Project</div>
+            <div slot="Project">
+                <lightning-input type="text" label="Enter Project Name" value={projectvalue}
+                    onchange={handlechangeprojectvalue}>
+                </lightning-input>
+            </div>
+            <div slot="button" class="slds-align_absolute-center">
+                <lightning-button variant="brand" label="Add Project" onclick={handleClickOfAddProject}>
+                </lightning-button>
+            </div>
+        </c-modal>
+    </template>
+</template>
