@@ -130,7 +130,7 @@ export default class TodaysTasks extends LightningElement {
     }
 
     HandleSubmitFinalTask() {
-        if (this.TaskId && this.Hours !=null) {
+        // if (this.TaskId && this.Hours !=null) {
             CreateFinalTask({ AdditionalComments: this.additionalmessage, Hours: this.Hours, TaskId: this.tasksId })
                 .then((result) => {
                     this.dispatchEvent(new ShowToastEvent({
@@ -143,9 +143,9 @@ export default class TodaysTasks extends LightningElement {
                 }).catch((err) => {
                     console.log(err);
                 });
-        } else {
-            alert('cannot submit empty task');
-        }
+        // } else {
+        //     alert('cannot submit empty task');
+        // }
     }
 
     emptyform() {
