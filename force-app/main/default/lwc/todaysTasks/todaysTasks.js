@@ -5,6 +5,7 @@ import ReturnAllTasks from '@salesforce/apex/tcsEmployee.ReturnAllTasks';
 import CreateFinalTask from '@salesforce/apex/tcsEmployee.CreateFinalTask';
 import FetchAllProjects from '@salesforce/apex/tcsEmployee.FetchAllProjects';
 import CreateProject from '@salesforce/apex/tcsEmployee.CreateProject';
+import CurrentUserAccountDetails from '@salesforce/apex/tcsEmployee.CurrentUserAccountDetails';
 
 export default class TodaysTasks extends LightningElement {
 
@@ -23,10 +24,38 @@ export default class TodaysTasks extends LightningElement {
     @track projectvalue = '';
     @track ProjectOption = [];
 
+
+
+    @track ProjectManagerTemplate = false;
+    @track EmployeeTemplate = false;
+
+
+
     connectedCallback() {
         this.fetchalltasks();
         this.fetchallprojects();
+        this.fetchcurrentuserAccount();
     }
+
+
+
+    fetchcurrentuserAccount() {
+        CurrentUserAccountDetails()
+            .then((result) => {
+           //     console.log(result.Designation__c);
+                if (result.Designation__c==='Project Manager') {
+                    this.ProjectManagerTemplate = true;
+                } else {
+                    this.EmployeeTemplate = true;
+                }
+            }).catch((err) => {
+
+            });
+    }
+
+
+
+
 
     get HoursOptions() {
         return [
@@ -62,6 +91,15 @@ export default class TodaysTasks extends LightningElement {
             ...this.ProjectOption,
         ];
     }
+
+    get ChooseProject() {
+        return [   
+            ...this.ProjectOption,
+        ];
+    }
+
+
+
 
     handleChangeHours(event) {
         this.Hours = event.detail.value;
@@ -123,29 +161,25 @@ export default class TodaysTasks extends LightningElement {
         ReturnAllTasks()
             .then((result) => {
                 this.emptyform();
-                this.taskOptions = result.map(item => ({ label: item.Name, value: item.Id }));
+                this.taskOptions = result.map(item => ({ label: item.Name, value: item.Id, description: item.Project__r.Name }));
             }).catch((error) => {
                 // Handle error if needed
             });
     }
 
     HandleSubmitFinalTask() {
-        // if (this.TaskId && this.Hours !=null) {
-            CreateFinalTask({ AdditionalComments: this.additionalmessage, Hours: this.Hours, TaskId: this.tasksId })
-                .then((result) => {
-                    this.dispatchEvent(new ShowToastEvent({
-                        title: "Success",
-                        message: "Task submitted successfully",
-                        variant: "success"
-                    }));
-                    this.additionalmessage = null;
-                    this.emptyform();
-                }).catch((err) => {
-                    console.log(err);
-                });
-        // } else {
-        //     alert('cannot submit empty task');
-        // }
+        CreateFinalTask({ AdditionalComments: this.additionalmessage, Hours: this.Hours, TaskId: this.tasksId })
+            .then((result) => {
+                this.dispatchEvent(new ShowToastEvent({
+                    title: "Success",
+                    message: "Task submitted successfully",
+                    variant: "success"
+                }));
+                this.additionalmessage = null;
+                this.emptyform();
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     emptyform() {
@@ -196,6 +230,7 @@ export default class TodaysTasks extends LightningElement {
             }).catch((error) => {
                 console.error('Error creating project:', error);
             });
+
     }
 
     handleClickofaddtask(event) {

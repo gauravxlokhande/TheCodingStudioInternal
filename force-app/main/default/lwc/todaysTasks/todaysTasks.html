@@ -52,9 +52,18 @@
             <div slot="heading">Create New Task</div>
             <div slot="Project">
                 <template if:true={ShowProjectcombobox}>
-                    <lightning-combobox data-id="taskproject" label="Select project" value={valueproject}
-                        placeholder="Select project" options={ProjectOptions} onchange={handleChangeProjects}>
-                    </lightning-combobox>
+                    <template if:true={ProjectManagerTemplate}>
+                        <lightning-combobox data-id="taskproject" label="Select project" value={valueproject}
+                            placeholder="Select project" options={ProjectOptions} onchange={handleChangeProjects}>
+                        </lightning-combobox>
+                    </template>
+                </template>
+                <template if:true={ShowProjectcombobox}>
+                    <template if:true={EmployeeTemplate}>
+                        <lightning-combobox data-id="taskproject" label="Select project" value={valueproject}
+                            placeholder="Select project" options={ChooseProject} onchange={handleChangeProjects}>
+                        </lightning-combobox>
+                    </template>
                 </template>
                 <lightning-input type="text" label="Task Name" value={taskname} onchange={handleTaskName}
                     data-id="taskname">
@@ -74,11 +83,13 @@
     <template if:true={ProjectTemplate}>
         <c-modal onhidemodalgloble={handleHideModaltwo}>
             <div slot="heading">Add New Project</div>
+
             <div slot="Project">
                 <lightning-input type="text" label="Enter Project Name" value={projectvalue}
                     onchange={handlechangeprojectvalue}>
                 </lightning-input>
             </div>
+
             <div slot="button" class="slds-align_absolute-center">
                 <lightning-button variant="brand" label="Add Project" onclick={handleClickOfAddProject}>
                 </lightning-button>
