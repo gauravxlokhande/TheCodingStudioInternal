@@ -28,12 +28,12 @@
                     vitae eaque, sunt, possimus dignissimos temporibus corrupti provident.
                 </p>
                 <lightning-combobox data-id="taskComboBox" class="slds-m-top_medium" name="progress" required
-                    value={tasksId} placeholder="Select your task" label="Select Tasks" options={optionsTasks}
-                    onchange={handleChangeTasks}>
+                    message-when-value-missing="Please Select Task" value={tasksId} placeholder="Select your task"
+                    label="Select Tasks" options={optionsTasks} onchange={handleChangeTasks}>
                 </lightning-combobox>
-                <lightning-combobox data-id="timeComboBox" class="slds-m-top_small" name="progress" label="Select Time"
-                    required value={Hours} placeholder="Select time consumed" options={HoursOptions}
-                    onchange={handleChangeHours}>
+                <lightning-combobox data-id="timeComboBox" class="slds-m-top_small" name="progress"
+                    message-when-value-missing="Please Select Time" label="Select Time" required value={Hours}
+                    placeholder="Select time consumed" options={HoursOptions} onchange={handleChangeHours}>
                 </lightning-combobox>
                 <lightning-textarea class="slds-m-top_small" max-length="1000" name="inputName" label="Message"
                     placeholder="Write any additional comments..." value={additionalmessage} variant="standard"
@@ -96,4 +96,6 @@
             </div>
         </c-modal>
     </template>
+
+
 </template>

@@ -168,7 +168,14 @@ export default class TodaysTasks extends LightningElement {
     }
 
     HandleSubmitFinalTask() {
-        CreateFinalTask({ AdditionalComments: this.additionalmessage, Hours: this.Hours, TaskId: this.tasksId })
+        if (this.Hours=='' || this.tasksId=='') {
+            this.dispatchEvent(new ShowToastEvent({
+                title: "Empty Exception",
+                message: "Cannot Submit Empty Record",
+                variant: "warning"
+            }));
+        } else {
+            CreateFinalTask({ AdditionalComments: this.additionalmessage, Hours: this.Hours, TaskId: this.tasksId })
             .then((result) => {
                 this.dispatchEvent(new ShowToastEvent({
                     title: "Success",
@@ -180,6 +187,8 @@ export default class TodaysTasks extends LightningElement {
             }).catch((err) => {
                 console.log(err);
             });
+        }
+       
     }
 
     emptyform() {
@@ -244,4 +253,7 @@ export default class TodaysTasks extends LightningElement {
         this.ProjectTemplate = false;
         this.emptyform();
     }
+    
+
+  
 }
