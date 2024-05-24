@@ -1,0 +1,43 @@
+.header {
+    background-color: #F9FAFC;
+    height: 12vh;
+}
+
+.search {
+    width: 60%;
+}
+
+.main {
+    height: 88vh;
+    background-color: white;
+}
+
+.header11 {
+    background-color: #F9FAFC;
+    height: 88vh;
+
+}
+
+.main {
+    overflow: scroll;
+}
+
+.qurie {
+    background-color: #F9FAFC;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 120px;
+    overflow: hidden;
+}
+
+
+.qname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qdescription {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
